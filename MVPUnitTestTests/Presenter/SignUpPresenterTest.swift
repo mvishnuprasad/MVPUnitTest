@@ -23,10 +23,10 @@ final class SignUpPresenterTest: XCTestCase {
         let mockSignUpModelValidator = MockSignUpModelValidator()
         let sut = SignUpPresenter(formModelValidator : mockSignUpModelValidator)
         sut.processUserSignUp(formModel: signupFormModel)
-        XCTAssertTrue(mockSignUpModelValidator.isValidFirstName)
-        XCTAssertTrue(mockSignUpModelValidator.isValidLastName)
-        XCTAssertTrue(mockSignUpModelValidator.isValidPassword)
-        XCTAssertTrue(mockSignUpModelValidator.isValidRepeatPassword)
+        XCTAssertTrue(mockSignUpModelValidator.isValidFirstName, "first name was not validated")
+        XCTAssertTrue(mockSignUpModelValidator.isValidLastName, "last name was not validated")
+        XCTAssertTrue(mockSignUpModelValidator.isValidPassword, "password was not validated")
+        XCTAssertTrue(mockSignUpModelValidator.isValidRepeatPassword, "repeat password was not validated")
     }
 
 }
