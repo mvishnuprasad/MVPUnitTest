@@ -74,14 +74,14 @@ final class SignInFormModelValidateTests: XCTestCase {
     }
     
     func testSignUpFormModelTests_passwordIsMatched_ShouldReturnTrue() {
-        let IsMatched = sut.IsPasswordMatched(password:"123456",Repeated:"123456")
+        let IsMatched = sut.isPasswordMatched(password:"123456",repeated:"123456")
         
         XCTAssertTrue(IsMatched, "the IsPasswordMatched() should return true if password match but it return false ")
         
     }
     
     func testSignUpFormModelTests_passwordIsNotMatched_ShouldReturnFalse() {
-        let IsMatched = sut.IsPasswordMatched(password:"123456",Repeated:"1234")
+        let IsMatched = sut.isPasswordMatched(password:"123456",repeated:"1234")
         XCTAssertFalse(IsMatched, "the IsPasswordMatched() should return false if password not match but it return true ")
     }
     
