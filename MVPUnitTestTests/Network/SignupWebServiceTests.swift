@@ -12,7 +12,7 @@ import XCTest
 final class SignUpWebServiceTests: XCTestCase {
     
     var sut:SignUpWebService!
-    var signUpFormRequestModel:SignUpFormRequestModel!
+    var signUpFormRequestModel:SignUpFormModel!
     
     override func setUp() {
         /// Setting up mock url protocol for usage
@@ -22,7 +22,7 @@ final class SignUpWebServiceTests: XCTestCase {
         
         sut = SignUpWebService(urlString:SignUpConstants.signUpUrlString ,urlSession: urlSession)
         
-        signUpFormRequestModel = SignUpFormRequestModel(firstName:"vishnu",lastName:"prasad",email:"vpm@vpm.com",password:"123456")
+        signUpFormRequestModel = SignUpFormModel(firstName:"vishnu",lastName:"prasad",email:"vpm@vpm.com",password:"123456",repeatPassword: "123456")
     }
     
     override func tearDown() {
