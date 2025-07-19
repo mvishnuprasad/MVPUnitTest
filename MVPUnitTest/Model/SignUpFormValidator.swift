@@ -7,8 +7,7 @@
 
 import Foundation
 
-class SignUpFormValidator :ValidatorProtocol {
-    
+class SignUpFormValidator : ValidatorProtocol {
     
     func IsValidFirstName (_ firstName:String)-> Bool {
         var isValid = true
@@ -35,7 +34,6 @@ class SignUpFormValidator :ValidatorProtocol {
         if lastName.count <=  SignUpConstants.firstNameMinLength || lastName.count > SignUpConstants.lastNameMaxLength {
             isValid =  false
         }
-        
         return isValid
     }
     

@@ -7,6 +7,5 @@
 
 import Foundation
  struct SignUpResponseModel:Codable {
-    
     var status:String
 }

@@ -2,18 +2,22 @@
 //  SignUpPresenter.swift
 //  MVPUnitTest
 //
-//  Created by qbuser on 18/07/25.
+//  Created by vishnuprasad on 18/07/25.
 //
 
 import Foundation
 class SignUpPresenter {
     private var formModelValidator : ValidatorProtocol
-    init(formModelValidator: ValidatorProtocol){
+    private var  websService : SignUpWebServiceProtocol
+    private var delegate : SignUpViewDelegateProtocol
+    init(formModelValidator: ValidatorProtocol, websService: SignUpWebServiceProtocol,delegate : SignUpViewDelegateProtocol){
         self.formModelValidator = formModelValidator
+        self.websService = websService
+        self.delegate = delegate
     }
     func processUserSignUp(formModel: SignUpFormModel){
         if !formModelValidator.IsValidFirstName(formModel.firstName){
-            return 
+            return
         }
         if !formModelValidator.isValidLastNme(lastName: formModel.lastName){
             return
@@ -23,6 +27,17 @@ class SignUpPresenter {
         }
         if !formModelValidator.isPasswordMatched(password: formModel.password, repeated: formModel.repeatPassword){
             return
+        }
+        let requestModel = SignUpFormModel(firstName: formModel.firstName, lastName: formModel.lastName, email: formModel.email, password: formModel.password, repeatPassword: formModel.repeatPassword)
+        websService.signUp(withForm: requestModel) { response, error in
+            if let _ = response {
+                self.delegate.successFulSignUP()
+                return
+            }
+            if let err = error {
+                self.delegate.errorHandler(error: err )
+                return
+            }
         }
     }
 }

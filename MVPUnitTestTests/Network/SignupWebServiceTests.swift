@@ -37,7 +37,7 @@ final class SignUpWebServiceTests: XCTestCase {
         MockUrlProtocol.stubResponseData =  jsonString.data(using: .utf8)
         let expectaion = self.expectation(description: "SignUp Web Service Response Expectasion .")
         
-        sut.SignUp(withForm:signUpFormRequestModel) { (SignUpResponseModel , error) in
+        sut.signUp(withForm:signUpFormRequestModel) { (SignUpResponseModel , error) in
             XCTAssertEqual(SignUpResponseModel?.status, "ok")
             expectaion.fulfill()
             
@@ -56,7 +56,7 @@ final class SignUpWebServiceTests: XCTestCase {
         let expectaion =  self.expectation(description: "SignUp() method expectation is got different Json Response")
         
         
-        sut.SignUp(withForm:signUpFormRequestModel) { (SignUpResponseModel , error) in
+        sut.signUp(withForm:signUpFormRequestModel) { (SignUpResponseModel , error) in
             
             
             XCTAssertNil(SignUpResponseModel , "SignUp() must send Response as nil when i got Different Json Response but i got a value")
@@ -75,7 +75,7 @@ final class SignUpWebServiceTests: XCTestCase {
         let expectaion  = self.expectation(description: "An Empty Url Request Expectaion")
         
         
-        sut.SignUp(withForm: signUpFormRequestModel) { signUpResponse, error in
+        sut.signUp(withForm: signUpFormRequestModel) { signUpResponse, error in
             
             
             XCTAssertEqual(error, SignUpError.invalidUrlRequestString," expect from SignUp() return error invalid url but she don't and return a different one")
@@ -95,7 +95,7 @@ final class SignUpWebServiceTests: XCTestCase {
         MockUrlProtocol.error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: errorDescription])
         
         
-        sut.SignUp(withForm: signUpFormRequestModel) { responseModel, error in
+        sut.signUp(withForm: signUpFormRequestModel) { responseModel, error in
             
             XCTAssertEqual(error, SignUpError.failedRequest(description:errorDescription),"excpect from SignUp() return failedRequest error message because request is failed but it return different error")
             expectation.fulfill()

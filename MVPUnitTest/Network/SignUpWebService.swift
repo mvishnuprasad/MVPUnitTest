@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SignUpWebService {
+class SignUpWebService : SignUpWebServiceProtocol{
     
     private var urlSession:URLSession
     private var urlString:String
@@ -19,20 +19,20 @@ class SignUpWebService {
         self.urlSession = urlSession
     }
     
-    func SignUp(withForm SignUpModel:SignUpFormRequestModel , completionHandler:@escaping (SignUpResponseModel?, SignUpError?) -> Void) {
+    func signUp(withForm SignUpModel:SignUpFormModel , completionHandler:@escaping (SignUpResponseModel?, SignUpError?) -> Void) {
         
         guard let url = URL(string: urlString) else {
             completionHandler(nil,SignUpError.invalidUrlRequestString)
             return
         }
-        var urlRequest          = URLRequest(url: url)
-        urlRequest.httpMethod   = "POST"
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
         urlRequest.httpBody  = try? JSONEncoder().encode(SignUpModel)
         
         let dataTask =  urlSession.dataTask(with: urlRequest) { data, response, error in
-        
+            
             if let error = error {
                 return completionHandler(nil,SignUpError.failedRequest(description: error.localizedDescription))
             }
