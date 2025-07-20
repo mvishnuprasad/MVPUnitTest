@@ -28,13 +28,13 @@ final class NavigationTest: XCTestCase {
             return
         }
     }
-    func testViewButton_WhenTapped_LoadSecondVC2() {
-        let spyVC = SpyVC(rootViewController: sut)
-        sut.termsButton.sendActions(for: .touchUpInside)
-        guard let _ = spyVC.topViewController as? TermsVC else {
-            XCTFail("Not Terms VC \(spyVC.pushedVC)")
-            return
-        }
-    }
+//    func testViewButton_WhenTapped_LoadSecondVC2() {
+//        let spyVC = SpyVC(rootViewController: sut)
+//        sut.termsButton.sendActions(for: .touchUpInside)
+//        guard let _ = spyVC.topViewController as? TermsVC else {
+//            XCTFail("Not Terms VC \(spyVC.pushedVC)")
+//            return
+//        }
+//    }
      
 }

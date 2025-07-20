@@ -17,13 +17,21 @@ class SignUpPresenter : PresenterProtocol{
     }
     func processUserSignUp(formModel: SignUpFormModel){
         if !formModelValidator.IsValidFirstName(formModel.firstName){
+            delegate.errorHandler(error:SignUpError.invalidUrlRequestString)
             return
+        }else{
+            delegate.successFulSignUP()
         }
         if !formModelValidator.isValidLastNme(lastName: formModel.lastName){
             return
         }
         if !formModelValidator.isValidPassword(password: formModel.password){
+            delegate.errorHandler(error:SignUpError.invalidUrlRequestString)
+
             return
+        }
+        else{
+            delegate.successFulSignUP()
         }
         if !formModelValidator.isPasswordMatched(password: formModel.password, repeated: formModel.repeatPassword){
             return

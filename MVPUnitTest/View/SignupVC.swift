@@ -13,7 +13,7 @@ class SignupVC: UIViewController {
     var signUpPresenter: PresenterProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setID()
         if signUpPresenter == nil {
             let modelValidator = SignUpFormValidator()
             let webService = SignUpWebService(urlString: SignUpConstants.signUpUrlString)
@@ -23,6 +23,7 @@ class SignupVC: UIViewController {
     @IBAction func termsButtonAction(_ sender: Any) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "TermsVC") as! TermsVC
+        vc.view.accessibilityIdentifier = "TermsVc"
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -40,11 +41,28 @@ class SignupVC: UIViewController {
     
 }
 extension SignupVC : SignUpViewDelegateProtocol {
+    func setID() {
+        firstNameTextField.accessibilityIdentifier = "firstName"
+        passWordTextField.accessibilityIdentifier = "password"
+        signUpButton.accessibilityIdentifier = "signupButton"
+        termsButton.accessibilityIdentifier = "termsButton"
+
+    }
     func successFulSignUP() {
-        
+        let alert = UIAlertController(title: "Success", message: "Validation Success", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        DispatchQueue.main.async {
+            alert.view.accessibilityIdentifier = "successDialog"
+            self.present(alert, animated: true)
+        }
     }
     
     func errorHandler(error: SignUpError) {
-        
+        let alert = UIAlertController(title: "Error", message: "Validation Failed", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        DispatchQueue.main.async {
+            alert.view.accessibilityIdentifier = "errorDialog"
+            self.present(alert, animated: true)
+        }
     }
 }
