@@ -30,7 +30,7 @@ final class SignUpVCTest: XCTestCase {
         passWordTextField = try XCTUnwrap(sut.passWordTextField, "Text field not connected")
         repeatPasswordTextField = try XCTUnwrap(sut.repeatPasswordTextField, "Text field not connected")
         signUpButton = try XCTUnwrap(sut.signUpButton, "Button not connected")
-   
+        
         mockSignUpModelValidator = MockSignUpModelValidator()
         mockSignUpViewDelegate = MockSignUpViewDelegate()
         mockSignUpWebService = MockSignUpWebService()
@@ -66,8 +66,19 @@ final class SignUpVCTest: XCTestCase {
         let mockSignUpPresenter = MockSignUpPresenter(formModelValidator: mockSignUpModelValidator, websService: mockSignUpWebService, delegate: mockSignUpViewDelegate)
         sut.signUpPresenter = mockSignUpPresenter
         sut.signUpButton.sendActions(for:.touchUpInside)
-
+        
         XCTAssertTrue(mockSignUpPresenter.processUserSignUpCalled, "Method not called")
     }
-
+    func testEmailTextField_WhenCreated_HasContentTypeEmail () {
+        XCTAssertEqual(EmailTestField.textContentType, .emailAddress, "Different content type")
+    }
+    func testPassWordTextField_WhenCreated_HasSecureField () {
+        XCTAssertEqual(passWordTextField.isSecureTextEntry, true, "Not secure field")
+    }
+    func testRepeatPassWordTextField_WhenCreated_HasSecureField () {
+        XCTAssertTrue(passWordTextField.isSecureTextEntry , "Not secure field")
+    }
+    func testEmailTextField_WhenCreated_HasKeyBoardTypeEmail () {
+        XCTAssertEqual(EmailTestField.keyboardType==UIKeyboardType.emailAddress, true, "Not email keyboard type")
+    }
 }

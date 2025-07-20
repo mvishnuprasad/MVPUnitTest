@@ -9,6 +9,7 @@ import UIKit
 
 class SignupVC: UIViewController {
     
+    @IBOutlet weak var termsButton: UIButton!
     var signUpPresenter: PresenterProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +19,11 @@ class SignupVC: UIViewController {
             let webService = SignUpWebService(urlString: SignUpConstants.signUpUrlString)
             signUpPresenter = SignUpPresenter(formModelValidator: modelValidator, websService: webService, delegate: self)
         }
+    }
+    @IBAction func termsButtonAction(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "TermsVC") as! TermsVC
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func signUp(_ sender: Any) {
