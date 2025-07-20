@@ -2,7 +2,7 @@
 //  NavigationTest.swift
 //  MVPUnitTestTests
 //
-//  Created by qbuser on 19/07/25.
+//  Created by vishnuprasadm on 19/07/25.
 //
 
 import XCTest
@@ -31,8 +31,8 @@ final class NavigationTest: XCTestCase {
     func testViewButton_WhenTapped_LoadSecondVC2() {
         let spyVC = SpyVC(rootViewController: sut)
         sut.termsButton.sendActions(for: .touchUpInside)
-        guard let _ = spyVC.pushedVC as? TermsVC else {
-            XCTFail("Not Terms VC")
+        guard let _ = spyVC.topViewController as? TermsVC else {
+            XCTFail("Not Terms VC \(spyVC.pushedVC)")
             return
         }
     }
